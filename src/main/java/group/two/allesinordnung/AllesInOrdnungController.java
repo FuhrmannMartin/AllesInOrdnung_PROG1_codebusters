@@ -4,13 +4,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -20,6 +20,15 @@ import java.io.IOException;
 public class AllesInOrdnungController {
 
     private String filter = "all";
+    String regexp = "";
+
+    public Element selectedElement;
+
+    @FXML
+    private Button EditOkID;
+
+    @FXML
+    private TextField searchID;
 
     @FXML
     private MenuItem addElementID;
@@ -37,12 +46,6 @@ public class AllesInOrdnungController {
     private ListView<String> listViewID;
 
     @FXML
-    private MenuItem editElementID;
-
-    @FXML
-    private MenuItem searchElementID;
-
-    @FXML
     private MenuItem showAllID;
 
     @FXML
@@ -55,45 +58,40 @@ public class AllesInOrdnungController {
     private MenuItem showDVDsID;
 
     @FXML
-    private ImageView showImageID;
+    private TextField authorID;
 
     @FXML
-    private TextFlow showTextID;
+    private TextField titleID;
+
+    @FXML
+    private TextField typeID;
 
     @FXML
     void addElement(ActionEvent event) {
-        Element element1 = new Element("Rattatatam, mein Herz", "book", "Franziska Seyboldt");
-        ElementList.addElement(element1);
-        Element element2 = new Element("Kid A", "CD", "Radiohead");
-        ElementList.addElement(element2);
-        updateListView();
+        try {
+            //Load second scene
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddElement.fxml"));
+            Parent root = loader.load();
+
+            // Get controller
+            AddElementController addElementController = loader.getController();
+
+            //Show scene 2 in new window
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Neues Element hinzufuegen!");
+            stage.showAndWait();
+            updateListView();
+        } catch (IOException ex) {
+            System.err.println("Error when loading AddElementController!");
+        }
     }
 
     @FXML
     void deleteElement(ActionEvent event) {
-        ObservableList<Integer> selection;
-        selection = listViewID.getSelectionModel().getSelectedIndices();
-        Element selectedElement = ElementList.elementsFiltered.get(selection.get(0));
-
-        ElementList.deleteElement(selectedElement.id);
+        ElementList.deleteElementFromElementList(selectedElement.hash);
+        deleteVisibleElementInfo();
         updateListView();
-        showTextID.getChildren().clear();
-        Element.count--;
-    }
-
-    @FXML
-    void editElement(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(AllesInOrdnung.class.getResource("EditElement.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 350.0, 180.0);
-        Stage stage = new Stage();
-        stage.setTitle("Alles in Ordnung - Edit!");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
-    void searchElement(ActionEvent event) {
-
     }
 
     @FXML
@@ -111,28 +109,28 @@ public class AllesInOrdnungController {
 
     @FXML
     void showAll(ActionEvent event) {
-        showTextID.getChildren().clear();
+        deleteVisibleElementInfo();
         filter = "all";
         updateListView();
     }
 
     @FXML
     void showBooks(ActionEvent event) {
-        showTextID.getChildren().clear();
+        deleteVisibleElementInfo();
         filter = "book";
         updateListView();
     }
 
     @FXML
     void showCDs(ActionEvent event) {
-        showTextID.getChildren().clear();
+        deleteVisibleElementInfo();
         filter = "CD";
         updateListView();
     }
 
     @FXML
     void showDVDs(ActionEvent event) {
-        showTextID.getChildren().clear();
+        deleteVisibleElementInfo();
         filter = "DVD";
         updateListView();
     }
@@ -141,18 +139,73 @@ public class AllesInOrdnungController {
     void listViewMouseClicked(MouseEvent event) {
         ObservableList<Integer> selection;
         selection = listViewID.getSelectionModel().getSelectedIndices();
-        Element selectedElement = ElementList.elementsFiltered.get(selection.get(0));
+        try {
+            selectedElement = ElementList.elementsFiltered.get(selection.get(0));
+            updateVisibleElementInfo(selectedElement);
+        } catch (Exception exception) {
+            System.out.println("Invalid selection!");
+        }
+    }
 
-        Text t1 = ElementList.getElementText(selectedElement.id);
+    @FXML
+    public void search(ActionEvent event) {
+        deleteVisibleElementInfo();
+        regexp = searchID.getText();
+        updateListView();
+    }
 
-        showTextID.getChildren().clear();
-        showTextID.getChildren().add(t1);
+    @FXML
+    public void author() {
+        String string = authorID.getText();
+        ElementList.editElementInElementList(selectedElement.hash, "author", string);
+    }
+
+    @FXML
+    public void title() {
+        String string = titleID.getText();
+        ElementList.editElementInElementList(selectedElement.hash, "title", string);
+    }
+
+    @FXML
+    public void type() {
+        String string = typeID.getText();
+        if (string.equals("CD") || string.equals("DVD") || string.equals("book")) {
+            ElementList.editElementInElementList(selectedElement.hash, "type", string);
+        }
+    }
+
+    @FXML
+    void EditOk(ActionEvent event) {
+        if (selectedElement != null) {
+            author();
+            title();
+            type();
+            ElementList.updateHash(selectedElement.hash);
+            System.out.println(selectedElement);
+            updateListView();
+        }
     }
 
     public void updateListView() {
         listViewID.getItems().clear();
-        String[] titles = ElementList.getElementList(filter);
+        String[] titles = ElementList.getElementList(filter, regexp);
         listViewID.getItems().addAll(titles);
+    }
+
+    public void updateVisibleElementInfo(Element selectedElement) {
+        typeID.clear();
+        typeID.appendText(selectedElement.type);
+        authorID.clear();
+        authorID.appendText(selectedElement.author);
+        titleID.clear();
+        titleID.appendText(selectedElement.title);
+        System.out.println(selectedElement);
+    }
+
+    public void deleteVisibleElementInfo() {
+        typeID.clear();
+        authorID.clear();
+        titleID.clear();
     }
 
 }

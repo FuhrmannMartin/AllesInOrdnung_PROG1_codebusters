@@ -2,38 +2,33 @@ package group.two.allesinordnung;
 
 public class Element {
 
-    public static int count;
-    public int id;
-    public String title;
     public String type;
+    public String title;
     public String author;
+    public int hash;
 
-    public Element(String title, String type, String author) {
+    public Element(String title, String type, String author, int hash) {
         this.title = title;
-        this.type = type;
+        if (type.equals("CD") || type.equals("DVD") || type.equals("book")) {
+            this.type = type;
+        } else {
+            this.type = "undefined";
+        }
         this.author = author;
-        this.id = count;
-        count++;
-    }
-
-    public Element() {
-        //this.id = count;
-        count++;
-    }
-
-    public static int getCount() {
-        return count;
-    }
-
-    public static void setCount(int count) {
-        Element.count = count;
+        if (hash != 0) {
+            this.hash = hash;
+        } else {
+            this.hash = (title + type + author).hashCode();
+        }
     }
 
     @Override
     public String toString() {
-        return title;
+        return type + "; " + title + "; " + author + "; " + hash;
     }
 
-
+    public int updateHash() {
+        return (this.title + this.type + this.author).hashCode();
+    }
 
 }

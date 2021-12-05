@@ -1,7 +1,6 @@
 package group.two.allesinordnung;
 
 import com.google.gson.Gson;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
@@ -23,22 +22,52 @@ public class ElementList {
         elementList.clear();
     }
 
-    public static void addElement(Element element) {
-        elementList.add(element);
-    }
-
-    public static void deleteElement(int id) {
+    public static void addElementToElementList(Element element) {
+        boolean elementAlreadyExisting = false;
         int n = elementList.size();
         int i = 0;
 
         while (i < n) {
-            if (elementList.get(i).id == id) {
-                elementList.remove(i);
+            if (elementList.get(i).hash == element.hash) {
+                elementAlreadyExisting = true;
                 break;
             }
             i++;
         }
 
+        if (!elementAlreadyExisting) {
+            elementList.add(element);
+        }
+    }
+
+    public static void deleteElementFromElementList(int hash) {
+        int n = elementList.size();
+        int i = 0;
+
+        while (i < n) {
+            if (elementList.get(i).hash == hash) {
+                elementList.remove(i);
+                break;
+            }
+            i++;
+        }
+    }
+
+    public static void editElementInElementList(int hash, String elementProperty, String string) {
+        int n = elementList.size();
+        int i = 0;
+
+        while (i < n) {
+            if (elementList.get(i).hash == hash) {
+                switch (elementProperty) {
+                    case "type" -> elementList.get(i).type = string;
+                    case "title" -> elementList.get(i).title = string;
+                    case "author" -> elementList.get(i).author = string;
+                }
+                break;
+            }
+            i++;
+        }
     }
 
     public static void exportElementList(Window stage) {
@@ -67,40 +96,49 @@ public class ElementList {
     }
 
     public static void importElementList(Window stage) {
-
         //https://www.youtube.com/watch?v=7lnVelyHxrc
         //https://attacomsian.com/blog/gson-read-write-json
         FileChooser fc = new FileChooser();
         fc.setTitle("Open Dialog");
-        //fc.setInitialFileName("jsonDatabase");
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("json file", "*.json"));
         try {
-            ElementList.newElementList();
-            Element.setCount(0);
+            newElementList();
             File file = fc.showOpenDialog(stage);
             Gson gson = new Gson();
             String json = Files.readString(file.toPath());
             Pattern pattern = Pattern.compile("\\{.*}");
             Matcher matcher = pattern.matcher(json);
             while (matcher.find()) {
-                //Element element = new Element();
                 Element element = gson.fromJson(matcher.group(), Element.class);
-                ElementList.addElement(element);
+                addElementToElementList(element);
             }
         } catch (Exception ex) {
             System.out.println("Error while importing!");
         }
     }
 
-    public static String[] getElementList(String filter) {
+    public static String[] getElementList(String filter, String regexp) {
         elementsFiltered.clear();
+        boolean searchActive = false;
+        boolean matchFound;
+
+        if (regexp.length() > 0) {
+            searchActive = true;
+        }
 
         for (Element element : elementList) {
-            if (filter.equals("all")) {
-                elementsFiltered.add(element);
-            } else {
-                if (element.type.equals(filter)) {
+            if (searchActive) {
+                Pattern pattern = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
+                Matcher matcher = pattern.matcher(element.title);
+                matchFound = matcher.find();
+            } else {matchFound = true;}
+            if(matchFound) {
+                if (filter.equals("all")) {
                     elementsFiltered.add(element);
+                } else {
+                    if (element.type.equals(filter)) {
+                        elementsFiltered.add(element);
+                    }
                 }
             }
         }
@@ -116,27 +154,16 @@ public class ElementList {
         return titles;
     }
 
-    public static Text getElementText(int id) {
-        Element selectedElement = getElementByID(id);
-        String displayText = selectedElement.type + System.lineSeparator() + "author: " + selectedElement.author + System.lineSeparator() + "title: " + selectedElement.title;
-
-        return new Text(displayText);
-    }
-
-    private static Element getElementByID(int id) {
+    public static void updateHash(int hash) {
         int n = elementList.size();
         int i = 0;
-        Element selectedElement = null;
 
         while (i < n) {
-            if (elementList.get(i).id == id) {
-                selectedElement = elementList.get(i);
+            if (elementList.get(i).hash == hash) {
+                elementList.get(i).hash = elementList.get(i).updateHash();
                 break;
             }
             i++;
         }
-
-        return selectedElement;
     }
-
 }
