@@ -11,6 +11,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group.two.allesinordnung.AllesInOrdnungController">
@@ -64,6 +65,11 @@
                             <Text layoutX="50.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:" wrappingWidth="48.469818115234375" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="20.0" />
                             <TextField fx:id="typeID" layoutX="112.0" layoutY="10.0" onAction="#type" prefHeight="25.0" prefWidth="400.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="16.0" />
                      <Button fx:id="EditOkID" layoutX="463.0" layoutY="108.00000000000001" mnemonicParsing="false" onAction="#EditOk" text="Edit" AnchorPane.topAnchor="108.00000000000001" />
+                     <SVGPath fx:id="star1ID" content="M 240.000 260.000L 260.000 274.641L 257.321 250.000L 280.000 240.000L 257.321 230.000L 260.000 205.359L 240.000 220.000L 220.000 205.359L 222.679 230.000L 200.000 240.000L 222.679 250.000L 220.000 274.641z" layoutX="-132.0" layoutY="-120.0" onMouseClicked="#star1Clicked" scaleX="0.2" scaleY="0.2" />
+                     <SVGPath fx:id="star2ID" content="M 240.000 260.000L 260.000 274.641L 257.321 250.000L 280.000 240.000L 257.321 230.000L 260.000 205.359L 240.000 220.000L 220.000 205.359L 222.679 230.000L 200.000 240.000L 222.679 250.000L 220.000 274.641z" layoutX="-116.0" layoutY="-120.0" onMouseClicked="#star2Clicked" scaleX="0.2" scaleY="0.2" />
+                     <SVGPath fx:id="star3ID" content="M 240.000 260.000L 260.000 274.641L 257.321 250.000L 280.000 240.000L 257.321 230.000L 260.000 205.359L 240.000 220.000L 220.000 205.359L 222.679 230.000L 200.000 240.000L 222.679 250.000L 220.000 274.641z" layoutX="-100.0" layoutY="-120.0" onMouseClicked="#star3Clicked" scaleX="0.2" scaleY="0.2" />
+                     <SVGPath fx:id="star4ID" content="M 240.000 260.000L 260.000 274.641L 257.321 250.000L 280.000 240.000L 257.321 230.000L 260.000 205.359L 240.000 220.000L 220.000 205.359L 222.679 230.000L 200.000 240.000L 222.679 250.000L 220.000 274.641z" layoutX="-84.0" layoutY="-120.0" onMouseClicked="#star4Clicked" scaleX="0.2" scaleY="0.2" />
+                     <SVGPath fx:id="star5ID" content="M 240.000 260.000L 260.000 274.641L 257.321 250.000L 280.000 240.000L 257.321 230.000L 260.000 205.359L 240.000 220.000L 220.000 205.359L 222.679 230.000L 200.000 240.000L 222.679 250.000L 220.000 274.641z" layoutX="-68.0" layoutY="-120.0" onMouseClicked="#star5Clicked" scaleX="0.2" scaleY="0.2" />
                         </AnchorPane>
                     </SplitPane>
                 </AnchorPane>

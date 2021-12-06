@@ -11,6 +11,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -21,6 +24,8 @@ public class AllesInOrdnungController {
 
     private String filter = "all";
     String regexp = "";
+    Paint y = new Color(1,1,0,1.0);
+    Paint b = new Color(0,0,0,1.0);
 
     public Element selectedElement;
 
@@ -65,6 +70,21 @@ public class AllesInOrdnungController {
 
     @FXML
     private TextField typeID;
+
+    @FXML
+    private SVGPath star1ID;
+
+    @FXML
+    private SVGPath star2ID;
+
+    @FXML
+    private SVGPath star3ID;
+
+    @FXML
+    private SVGPath star4ID;
+
+    @FXML
+    private SVGPath star5ID;
 
     @FXML
     void addElement(ActionEvent event) {
@@ -184,6 +204,51 @@ public class AllesInOrdnungController {
             System.out.println(selectedElement);
             updateListView();
         }
+    }
+
+    @FXML
+    void star1Clicked(MouseEvent event) {
+        star1ID.setFill(y);
+        star2ID.setFill(b);
+        star3ID.setFill(b);
+        star4ID.setFill(b);
+        star5ID.setFill(b);
+    }
+
+    @FXML
+    void star2Clicked(MouseEvent event) {
+        star1ID.setFill(y);
+        star2ID.setFill(y);
+        star3ID.setFill(b);
+        star4ID.setFill(b);
+        star5ID.setFill(b);
+    }
+
+    @FXML
+    void star3Clicked(MouseEvent event) {
+        star1ID.setFill(y);
+        star2ID.setFill(y);
+        star3ID.setFill(y);
+        star4ID.setFill(b);
+        star5ID.setFill(b);
+    }
+
+    @FXML
+    void star4Clicked(MouseEvent event) {
+        star1ID.setFill(y);
+        star2ID.setFill(y);
+        star3ID.setFill(y);
+        star4ID.setFill(y);
+        star5ID.setFill(b);
+    }
+
+    @FXML
+    void star5Clicked(MouseEvent event) {
+        star1ID.setFill(y);
+        star2ID.setFill(y);
+        star3ID.setFill(y);
+        star4ID.setFill(y);
+        star5ID.setFill(y);
     }
 
     public void updateListView() {

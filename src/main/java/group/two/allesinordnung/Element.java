@@ -5,6 +5,7 @@ public class Element {
     public String type;
     public String title;
     public String author;
+    public int stars;
     public int hash;
 
     public Element(String title, String type, String author, int hash) {
