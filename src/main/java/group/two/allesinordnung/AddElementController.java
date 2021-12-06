@@ -38,13 +38,7 @@ public class AddElementController {
     }
 
     @FXML
-    void type() {
-        if (typeID.getText().equals("Book")) {
-            type = "book";
-        } else {
-            type = typeID.getText();
-        }
-    }
+    void type() { type = typeID.getText(); }
 
     @FXML
     void addElementCancel(ActionEvent event) {
@@ -58,11 +52,14 @@ public class AddElementController {
         title();
         type();
         if (isNotNullEmpty(type) && isNotNullEmpty(title) && isNotNullEmpty(author)) {
-            if (type.equals("CD") || type.equals("DVD") || type.equals("book")) {
+            if (type.equalsIgnoreCase("cd") || type.equalsIgnoreCase("dvd") || type.equalsIgnoreCase("book")) {
                 Element element = new Element(title, type, author, 0);
                 ElementList.addElementToElementList(element);
                 Stage stage = (Stage) addElementOkID.getScene().getWindow();
                 stage.close();
+            } else {
+                typeID.clear();
+                typeID.appendText("Invalid type! (CD/DVD/Book)");
             }
         }
     }
