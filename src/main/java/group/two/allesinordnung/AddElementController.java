@@ -4,6 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
 
 public class AddElementController {
@@ -11,6 +15,9 @@ public class AddElementController {
     private String type;
     private String title;
     private String author;
+
+    Paint y = new Color(1,1,0,1.0);
+    Paint b = new Color(0,0,0,1.0);
 
     @FXML
     private Button addElementCancelID;
@@ -26,6 +33,22 @@ public class AddElementController {
 
     @FXML
     private TextField typeID;
+
+    @FXML
+    private SVGPath star1AddID;
+
+    @FXML
+    private SVGPath star2AddID;
+
+    @FXML
+    private SVGPath star3AddID;
+
+    @FXML
+    private SVGPath star4AddID;
+
+    @FXML
+    private SVGPath star5AddID;
+
 
     @FXML
     void author() {
@@ -63,6 +86,52 @@ public class AddElementController {
             }
         }
     }
+
+    @FXML
+    void star1AddClicked(MouseEvent event) {
+        star1AddID.setFill(y);
+        star2AddID.setFill(b);
+        star3AddID.setFill(b);
+        star4AddID.setFill(b);
+        star5AddID.setFill(b);
+    }
+
+    @FXML
+    void star2AddClicked(MouseEvent event) {
+        star1AddID.setFill(y);
+        star2AddID.setFill(y);
+        star3AddID.setFill(b);
+        star4AddID.setFill(b);
+        star5AddID.setFill(b);
+    }
+
+    @FXML
+    void star3AddClicked(MouseEvent event) {
+        star1AddID.setFill(y);
+        star2AddID.setFill(y);
+        star3AddID.setFill(y);
+        star4AddID.setFill(b);
+        star5AddID.setFill(b);
+    }
+
+    @FXML
+    void star4AddClicked(MouseEvent event) {
+        star1AddID.setFill(y);
+        star2AddID.setFill(y);
+        star3AddID.setFill(y);
+        star4AddID.setFill(y);
+        star5AddID.setFill(b);
+    }
+
+    @FXML
+    void star5AddClicked(MouseEvent event) {
+        star1AddID.setFill(y);
+        star2AddID.setFill(y);
+        star3AddID.setFill(y);
+        star4AddID.setFill(y);
+        star5AddID.setFill(y);
+    }
+
 
     public static boolean isNotNullEmpty(String str) {
         // check if string is null
