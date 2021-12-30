@@ -76,7 +76,7 @@ public class AddElementController {
         type();
         if (isNotNullEmpty(type) && isNotNullEmpty(title) && isNotNullEmpty(author)) {
             if (type.equalsIgnoreCase("cd") || type.equalsIgnoreCase("dvd") || type.equalsIgnoreCase("book")) {
-                Element element = new Element(title, type, author, 0);
+                Element element = new Element(title, type, author);
                 ElementList.addElementToElementList(element);
                 Stage stage = (Stage) addElementOkID.getScene().getWindow();
                 stage.close();

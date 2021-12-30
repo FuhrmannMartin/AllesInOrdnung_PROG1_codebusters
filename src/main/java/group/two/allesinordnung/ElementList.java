@@ -1,11 +1,13 @@
 package group.two.allesinordnung;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
-
 import java.io.File;
-import java.nio.file.Files;
+import java.io.FileReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -71,33 +73,22 @@ public class ElementList {
     }
 
     public static void exportElementList(Window stage) {
-        StringBuilder jsonAllElements = new StringBuilder();
-
-        //https://www.youtube.com/watch?v=vL8RahFv8NY
-        //https://attacomsian.com/blog/gson-read-write-json
-        Gson gson = new Gson();
-
-        for (Element element : elementList) {
-            String json = gson.toJson(element) + System.lineSeparator();
-            jsonAllElements.append(json);
-        }
-
-        //https://www.youtube.com/watch?v=7lnVelyHxrc
         FileChooser fc = new FileChooser();
         fc.setTitle("Save Dialog");
-        //fc.setInitialFileName("jsonDatabase");
+        fc.setInitialFileName("database");
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("json file", "*.json"));
         try {
             File file = fc.showSaveDialog(stage);
-            WriteStringToFile.main(file, jsonAllElements.toString());
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            String json = gson.toJson(elementList); // converts to json
+            WriteStringToFile.main(file, json);
         } catch (Exception ex) {
             System.out.println("Error while exporting!");
         }
     }
 
     public static void importElementList(Window stage) {
-        //https://www.youtube.com/watch?v=7lnVelyHxrc
-        //https://attacomsian.com/blog/gson-read-write-json
+        // https://simplesolution.dev/java-convert-json-file-to-java-object-using-gson/
         FileChooser fc = new FileChooser();
         fc.setTitle("Open Dialog");
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("json file", "*.json"));
@@ -105,13 +96,9 @@ public class ElementList {
             newElementList();
             File file = fc.showOpenDialog(stage);
             Gson gson = new Gson();
-            String json = Files.readString(file.toPath());
-            Pattern pattern = Pattern.compile("\\{.*}");
-            Matcher matcher = pattern.matcher(json);
-            while (matcher.find()) {
-                Element element = gson.fromJson(matcher.group(), Element.class);
-                addElementToElementList(element);
-            }
+            FileReader fileReader = new FileReader(file);
+            Type type = new TypeToken<List<Element>>(){}.getType();
+            elementList = gson.fromJson(fileReader, type);
         } catch (Exception ex) {
             System.out.println("Error while importing!");
         }

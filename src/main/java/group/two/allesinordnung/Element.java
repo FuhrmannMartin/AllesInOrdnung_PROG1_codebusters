@@ -8,19 +8,11 @@ public class Element {
     public int stars;
     public int hash;
 
-    public Element(String title, String type, String author, int hash) {
+    public Element(String title, String type, String author) {
         this.title = title;
-        if (type.equals("CD") || type.equals("DVD") || type.equals("book")) {
-            this.type = type;
-        } else {
-            this.type = "undefined";
-        }
+        this.type = type;
         this.author = author;
-        if (hash != 0) {
-            this.hash = hash;
-        } else {
-            this.hash = (title + type + author).hashCode();
-        }
+        this.hash = (title + type + author).hashCode();
     }
 
     @Override
