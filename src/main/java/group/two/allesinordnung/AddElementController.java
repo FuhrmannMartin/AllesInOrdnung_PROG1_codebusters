@@ -15,6 +15,7 @@ public class AddElementController {
     private String type;
     private String title;
     private String author;
+    private static int stars;
 
     Paint y = new Color(1,1,0,1.0);
     Paint b = new Color(0,0,0,1.0);
@@ -76,7 +77,7 @@ public class AddElementController {
         type();
         if (isNotNullEmpty(type) && isNotNullEmpty(title) && isNotNullEmpty(author)) {
             if (type.equalsIgnoreCase("cd") || type.equalsIgnoreCase("dvd") || type.equalsIgnoreCase("book")) {
-                Element element = new Element(title, type, author);
+                Element element = new Element(title, type, author, stars);
                 ElementList.addElementToElementList(element);
                 Stage stage = (Stage) addElementOkID.getScene().getWindow();
                 stage.close();
@@ -94,6 +95,7 @@ public class AddElementController {
         star3AddID.setFill(b);
         star4AddID.setFill(b);
         star5AddID.setFill(b);
+        stars = 1;
     }
 
     @FXML
@@ -103,6 +105,7 @@ public class AddElementController {
         star3AddID.setFill(b);
         star4AddID.setFill(b);
         star5AddID.setFill(b);
+        stars = 2;
     }
 
     @FXML
@@ -112,6 +115,7 @@ public class AddElementController {
         star3AddID.setFill(y);
         star4AddID.setFill(b);
         star5AddID.setFill(b);
+        stars = 3;
     }
 
     @FXML
@@ -121,6 +125,7 @@ public class AddElementController {
         star3AddID.setFill(y);
         star4AddID.setFill(y);
         star5AddID.setFill(b);
+        stars = 4;
     }
 
     @FXML
@@ -130,6 +135,7 @@ public class AddElementController {
         star3AddID.setFill(y);
         star4AddID.setFill(y);
         star5AddID.setFill(y);
+        stars = 5;
     }
 
 

@@ -26,6 +26,7 @@ public class AllesInOrdnungController {
     String regexp = "";
     Paint y = new Color(1,1,0,1.0);
     Paint b = new Color(0,0,0,1.0);
+    private static int stars;
 
     public Element selectedElement;
 
@@ -194,12 +195,17 @@ public class AllesInOrdnungController {
         }
     }
 
+    public void stars() {
+        ElementList.editElementInElementList(selectedElement.hash, "stars", Integer.toString(stars));
+    }
+
     @FXML
     void EditOk(ActionEvent event) {
         if (selectedElement != null) {
             author();
             title();
             type();
+            stars();
             ElementList.updateHash(selectedElement.hash);
             System.out.println(selectedElement);
             updateListView();
@@ -213,6 +219,7 @@ public class AllesInOrdnungController {
         star3ID.setFill(b);
         star4ID.setFill(b);
         star5ID.setFill(b);
+        stars = 1;
     }
 
     @FXML
@@ -222,6 +229,7 @@ public class AllesInOrdnungController {
         star3ID.setFill(b);
         star4ID.setFill(b);
         star5ID.setFill(b);
+        stars = 2;
     }
 
     @FXML
@@ -231,6 +239,7 @@ public class AllesInOrdnungController {
         star3ID.setFill(y);
         star4ID.setFill(b);
         star5ID.setFill(b);
+        stars = 3;
     }
 
     @FXML
@@ -240,6 +249,7 @@ public class AllesInOrdnungController {
         star3ID.setFill(y);
         star4ID.setFill(y);
         star5ID.setFill(b);
+        stars = 4;
     }
 
     @FXML
@@ -249,6 +259,15 @@ public class AllesInOrdnungController {
         star3ID.setFill(y);
         star4ID.setFill(y);
         star5ID.setFill(y);
+        stars = 5;
+    }
+
+    void noStars() {
+        star1ID.setFill(b);
+        star2ID.setFill(b);
+        star3ID.setFill(b);
+        star4ID.setFill(b);
+        star5ID.setFill(b);
     }
 
     public void updateListView() {
@@ -265,12 +284,21 @@ public class AllesInOrdnungController {
         titleID.clear();
         titleID.appendText(selectedElement.title);
         System.out.println(selectedElement);
+        switch (selectedElement.stars) {
+            case 0 -> noStars();
+            case 1 -> star1Clicked(null);
+            case 2 -> star2Clicked(null);
+            case 3 -> star3Clicked(null);
+            case 4 -> star4Clicked(null);
+            case 5 -> star5Clicked(null);
+        }
     }
 
     public void deleteVisibleElementInfo() {
         typeID.clear();
         authorID.clear();
         titleID.clear();
+        noStars();
     }
 
 }

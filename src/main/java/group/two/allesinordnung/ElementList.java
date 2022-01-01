@@ -65,6 +65,7 @@ public class ElementList {
                     case "type" -> elementList.get(i).type = string;
                     case "title" -> elementList.get(i).title = string;
                     case "author" -> elementList.get(i).author = string;
+                    case "stars" -> elementList.get(i).stars = Integer.parseInt(string);
                 }
                 break;
             }

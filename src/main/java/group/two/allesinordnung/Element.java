@@ -8,16 +8,17 @@ public class Element {
     public int stars;
     public int hash;
 
-    public Element(String title, String type, String author) {
+    public Element(String title, String type, String author, int stars) {
         this.title = title;
         this.type = type;
         this.author = author;
         this.hash = (title + type + author).hashCode();
+        this.stars = stars;
     }
 
     @Override
     public String toString() {
-        return type + "; " + title + "; " + author + "; " + hash;
+        return type + "; " + title + "; " + author + "; " + stars + "; " + hash;
     }
 
     public int updateHash() {
