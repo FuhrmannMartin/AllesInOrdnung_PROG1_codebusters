@@ -19,22 +19,25 @@ import javafx.stage.Window;
 
 import java.io.IOException;
 
-
+/*
+controller for main GUI to manage active database
+ */
 public class AllesInOrdnungController {
 
-    private String filter = "all";
-    String regexp = "";
+    private String filter = "all"; // current filter settings (CD/DVD/books)
+    String regexp = ""; // current search filter settings
+    // colors for star feature
     Paint y = new Color(1,1,0,1.0);
     Paint b = new Color(0,0,0,1.0);
-    private static int stars;
+    private static int stars; // star voting for currently selected element
 
-    public Element selectedElement;
+    public Element selectedElement; // variable reflecting currently selected element by user
 
     @FXML
     private Button EditOkID;
 
     @FXML
-    private TextField searchID;
+    private TextField searchID; // GUI search window
 
     @FXML
     private MenuItem addElementID;
@@ -46,10 +49,10 @@ public class AllesInOrdnungController {
     private MenuItem changeDatabaseID;
 
     @FXML
-    private MenuItem exportDatabaseID;
+    private MenuItem exportDatabaseID;  // GUI export database option
 
     @FXML
-    private ListView<String> listViewID;
+    private ListView<String> listViewID; // GUI list showing all currently filtered elements
 
     @FXML
     private MenuItem showAllID;
@@ -64,30 +67,30 @@ public class AllesInOrdnungController {
     private MenuItem showDVDsID;
 
     @FXML
-    private TextField authorID;
+    private TextField authorID; // GUI author field for currently selected element
 
     @FXML
-    private TextField titleID;
+    private TextField titleID; // GUI title field for currently selected element
 
     @FXML
-    private TextField typeID;
+    private TextField typeID; // GUI type field for currently selected element
 
     @FXML
-    private SVGPath star1ID;
+    private SVGPath star1ID;  // GUI first star for currently selected element
 
     @FXML
-    private SVGPath star2ID;
+    private SVGPath star2ID;  // GUI second star for currently selected element
 
     @FXML
-    private SVGPath star3ID;
+    private SVGPath star3ID;  // GUI third star for currently selected element
 
     @FXML
-    private SVGPath star4ID;
+    private SVGPath star4ID;  // GUI fourth star for currently selected element
 
     @FXML
-    private SVGPath star5ID;
+    private SVGPath star5ID;  // GUI fifth star for currently selected element
 
-    @FXML
+    @FXML // second GUI for adding new element to current database
     void addElement(ActionEvent event) {
         try {
             //Load second scene
@@ -108,86 +111,87 @@ public class AllesInOrdnungController {
         }
     }
 
-    @FXML
+    @FXML // delete currently selected element from current database
     void deleteElement(ActionEvent event) {
         ElementList.deleteElementFromElementList(selectedElement.hash);
-        deleteVisibleElementInfo();
-        updateListView();
+        deleteVisibleElementInfo(); // remove information of deleted element from info section (lower right corner)
+        updateListView(); // update GUI list showing all currently filtered elements
     }
 
-    @FXML
+    @FXML // change to other database
     void changeDatabase(ActionEvent event) {
         Window stage = exportDatabaseID.getParentPopup().getOwnerWindow();
-        ElementList.importElementList(stage);
-        updateListView();
+        ElementList.importElementList(stage); // import from json file
+        filter = "all"; // set filter to show all types of elements
+        updateListView(); // update GUI list showing all elements
     }
 
     @FXML
     void exportDatabase(ActionEvent event) {
         Window stage = exportDatabaseID.getParentPopup().getOwnerWindow();
-        ElementList.exportElementList(stage);
+        ElementList.exportElementList(stage); // export to json file
     }
 
-    @FXML
+    @FXML // GUI button to set filter to show all types of elements
     void showAll(ActionEvent event) {
-        deleteVisibleElementInfo();
+        deleteVisibleElementInfo(); // remove element information from info section
         filter = "all";
-        updateListView();
+        updateListView(); // update GUI list showing all currently filtered elements
     }
 
-    @FXML
+    @FXML // GUI button to set filter to show only elements of type book
     void showBooks(ActionEvent event) {
         deleteVisibleElementInfo();
         filter = "book";
         updateListView();
     }
 
-    @FXML
+    @FXML // GUI button to set filter to show only elements of type CD
     void showCDs(ActionEvent event) {
         deleteVisibleElementInfo();
         filter = "CD";
         updateListView();
     }
 
-    @FXML
+    @FXML // GUI button to set filter to show only elements of type DVD
     void showDVDs(ActionEvent event) {
         deleteVisibleElementInfo();
         filter = "DVD";
         updateListView();
     }
 
-    @FXML
+    @FXML // function handling user request to select specific element from list
     void listViewMouseClicked(MouseEvent event) {
         ObservableList<Integer> selection;
         selection = listViewID.getSelectionModel().getSelectedIndices();
         try {
             selectedElement = ElementList.elementsFiltered.get(selection.get(0));
-            updateVisibleElementInfo(selectedElement);
+            updateVisibleElementInfo(selectedElement); // add element information from selected element to info section
         } catch (Exception exception) {
             System.out.println("Invalid selection!");
         }
     }
 
-    @FXML
+    @FXML // function handling user search request
     public void search(ActionEvent event) {
-        deleteVisibleElementInfo();
-        regexp = searchID.getText();
-        updateListView();
+        deleteVisibleElementInfo(); // remove element information from info section
+        regexp = searchID.getText(); // get user search request
+        updateListView(); // update visible element list
     }
 
-    @FXML
+    @FXML // function handling author edit
     public void author() {
         String string = authorID.getText();
-        ElementList.editElementInElementList(selectedElement.hash, "author", string);
+        ElementList.editElementInElementList(selectedElement.hash, "author", string); // element searched by hash code in element list
     }
 
-    @FXML
+    @FXML // function handling title edit
     public void title() {
         String string = titleID.getText();
         ElementList.editElementInElementList(selectedElement.hash, "title", string);
     }
 
-    @FXML
+    @FXML  // function handling type edit
     public void type() {
         String string = typeID.getText();
         if (string.equals("CD") || string.equals("DVD") || string.equals("book")) {
@@ -195,24 +199,26 @@ public class AllesInOrdnungController {
         }
     }
 
+    // function handling stars edit
     public void stars() {
         ElementList.editElementInElementList(selectedElement.hash, "stars", Integer.toString(stars));
     }
 
-    @FXML
+    @FXML // function handling user element edit request
     void EditOk(ActionEvent event) {
         if (selectedElement != null) {
+            // update properties according to user input
             author();
             title();
             type();
             stars();
-            ElementList.updateHash(selectedElement.hash);
+            ElementList.updateHash(selectedElement.hash); // update has code after edit
             System.out.println(selectedElement);
-            updateListView();
+            updateListView(); // update list of visible elements
         }
     }
 
-    @FXML
+    @FXML // 1 star appears gold
     void star1Clicked(MouseEvent event) {
         star1ID.setFill(y);
         star2ID.setFill(b);
@@ -222,7 +228,7 @@ public class AllesInOrdnungController {
         stars = 1;
     }
 
-    @FXML
+    @FXML // 2 stars appear gold
     void star2Clicked(MouseEvent event) {
         star1ID.setFill(y);
         star2ID.setFill(y);
@@ -232,7 +238,7 @@ public class AllesInOrdnungController {
         stars = 2;
     }
 
-    @FXML
+    @FXML // 3 stars appear gold
     void star3Clicked(MouseEvent event) {
         star1ID.setFill(y);
         star2ID.setFill(y);
@@ -242,7 +248,7 @@ public class AllesInOrdnungController {
         stars = 3;
     }
 
-    @FXML
+    @FXML // 4 stars appear gold
     void star4Clicked(MouseEvent event) {
         star1ID.setFill(y);
         star2ID.setFill(y);
@@ -252,7 +258,7 @@ public class AllesInOrdnungController {
         stars = 4;
     }
 
-    @FXML
+    @FXML // 5 stars appear gold
     void star5Clicked(MouseEvent event) {
         star1ID.setFill(y);
         star2ID.setFill(y);
@@ -262,6 +268,7 @@ public class AllesInOrdnungController {
         stars = 5;
     }
 
+    // no star appears gold
     void noStars() {
         star1ID.setFill(b);
         star2ID.setFill(b);
@@ -270,12 +277,14 @@ public class AllesInOrdnungController {
         star5ID.setFill(b);
     }
 
+    // function handling list update
     public void updateListView() {
-        listViewID.getItems().clear();
-        String[] titles = ElementList.getElementList(filter, regexp);
-        listViewID.getItems().addAll(titles);
+        listViewID.getItems().clear(); // clearing list
+        String[] titles = ElementList.getElementList(filter, regexp); // get title of all currently filtered elements
+        listViewID.getItems().addAll(titles); // show elements
     }
 
+    // function handling the visualization of currently selected element
     public void updateVisibleElementInfo(Element selectedElement) {
         typeID.clear();
         typeID.appendText(selectedElement.type);
@@ -294,6 +303,7 @@ public class AllesInOrdnungController {
         }
     }
 
+    // function removing the visualization of any element information
     public void deleteVisibleElementInfo() {
         typeID.clear();
         authorID.clear();

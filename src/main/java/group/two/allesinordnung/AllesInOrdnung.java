@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+// start program here
 public class AllesInOrdnung extends Application {
     @Override
     public void start(Stage stage) throws IOException {

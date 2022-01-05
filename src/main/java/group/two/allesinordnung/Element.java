@@ -1,5 +1,6 @@
 package group.two.allesinordnung;
 
+// class defining elements of type (CD/DVD/book)
 public class Element {
 
     public String type;
@@ -21,6 +22,9 @@ public class Element {
         return type + "; " + title + "; " + author + "; " + stars + "; " + hash;
     }
 
+    // has code is created out of title, type and author
+    // used to find elements in element list
+    // and to ensure every element is unique
     public int updateHash() {
         return (this.title + this.type + this.author).hashCode();
     }
