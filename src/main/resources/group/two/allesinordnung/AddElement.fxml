@@ -4,17 +4,21 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="197.0" prefWidth="482.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group.two.allesinordnung.AddElementController">
-   <Button fx:id="addElementOkID" layoutX="399.3333333333333" layoutY="144.66666666666666" mnemonicParsing="false" onAction="#addElementOk" text="OK" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="50.0" />
-   <Button fx:id="addElementCancelID" layoutX="330.6666666666667" layoutY="144.66666666666666" mnemonicParsing="false" onAction="#addElementCancel" text="Cancel" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="100.0" />
-   <TextField fx:id="authorID" layoutX="70.0" layoutY="70.0" onAction="#author" prefHeight="25.0" prefWidth="375.0" AnchorPane.leftAnchor="70.0" />
-   <Text layoutX="60.0" layoutY="85.94921875" strokeType="OUTSIDE" strokeWidth="0.0" text="Author:" AnchorPane.leftAnchor="20.0" />
-   <Text layoutX="63.0" layoutY="116.94921875" strokeType="OUTSIDE" strokeWidth="0.0" text="Title:" AnchorPane.leftAnchor="20.0" />
-   <TextField fx:id="titleID" layoutX="70.0" layoutY="100.0" onAction="#title" prefHeight="25.0" prefWidth="375.0" AnchorPane.leftAnchor="70.0" />
-   <Text layoutX="60.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:" wrappingWidth="48.469818115234375" AnchorPane.leftAnchor="20.0" />
-   <TextField fx:id="typeID" layoutX="68.0" layoutY="40.0" onAction="#type" prefHeight="25.0" prefWidth="375.0" AnchorPane.leftAnchor="70.0" />
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="197.0" prefWidth="443.0" style="-fx-background-radius: 2em; -fx-border-radius: 2em;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group.two.allesinordnung.AddElementController">
+   <Button fx:id="addElementOkID" layoutX="342.0" layoutY="142.0" mnemonicParsing="false" onAction="#addElementOk" prefHeight="26.0" prefWidth="82.0" style="-fx-background-radius: 5em; -fx-border-radius: 5em; -fx-background-color: lightgreen;" text="OK" AnchorPane.bottomAnchor="29.0" AnchorPane.rightAnchor="19.0" />
+   <Button fx:id="addElementCancelID" layoutX="258.0" layoutY="143.0" mnemonicParsing="false" onAction="#addElementCancel" prefHeight="26.0" prefWidth="75.0" style="-fx-background-radius: 5em; -fx-border-radius: 5em; -fx-background-color: lightgray;" text="Cancel" AnchorPane.bottomAnchor="28.0" AnchorPane.rightAnchor="110.0">
+      <font>
+         <Font name="Montserrat Regular" size="13.0" />
+      </font></Button>
+   <TextField fx:id="authorID" layoutX="70.0" layoutY="70.0" onAction="#author" prefHeight="26.0" prefWidth="359.0" style="-fx-background-radius: 5em; -fx-border-radius: 5em;" AnchorPane.leftAnchor="70.0" />
+   <Text layoutX="14.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AUTHOR" AnchorPane.leftAnchor="14.0" />
+   <Text layoutX="14.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TITLE" AnchorPane.leftAnchor="14.0" />
+   <TextField fx:id="titleID" layoutX="70.0" layoutY="100.0" onAction="#title" prefHeight="26.0" prefWidth="359.0" style="-fx-background-radius: 5em; -fx-border-radius: 5em;" AnchorPane.leftAnchor="70.0" />
+   <Text layoutX="14.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TYPE" wrappingWidth="48.469818115234375" AnchorPane.leftAnchor="14.0" />
+   <TextField fx:id="typeID" layoutX="68.0" layoutY="40.0" onAction="#type" prefHeight="26.0" prefWidth="359.0" style="-fx-background-radius: 5em; -fx-border-radius: 5em;" AnchorPane.leftAnchor="70.0" />
    <SVGPath fx:id="star1AddID" content="M 240.000 260.000L 260.000 274.641L 257.321 250.000L 280.000 240.000L 257.321 230.000L 260.000 205.359L 240.000 220.000L 220.000 205.359L 222.679 230.000L 200.000 240.000L 222.679 250.000L 220.000 274.641z" layoutX="-164.0" layoutY="-86.0" onMouseClicked="#star1AddClicked" scaleX="0.2" scaleY="0.2" />
    <SVGPath fx:id="star5AddID" content="M 240.000 260.000L 260.000 274.641L 257.321 250.000L 280.000 240.000L 257.321 230.000L 260.000 205.359L 240.000 220.000L 220.000 205.359L 222.679 230.000L 200.000 240.000L 222.679 250.000L 220.000 274.641z" layoutX="-100.0" layoutY="-86.0" onMouseClicked="#star5AddClicked" scaleX="0.2" scaleY="0.2" />
    <SVGPath fx:id="star3AddID" content="M 240.000 260.000L 260.000 274.641L 257.321 250.000L 280.000 240.000L 257.321 230.000L 260.000 205.359L 240.000 220.000L 220.000 205.359L 222.679 230.000L 200.000 240.000L 222.679 250.000L 220.000 274.641z" layoutX="-132.0" layoutY="-86.0" onMouseClicked="#star3AddClicked" scaleX="0.2" scaleY="0.2" />

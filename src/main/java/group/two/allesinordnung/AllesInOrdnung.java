@@ -11,7 +11,7 @@ import java.io.IOException;
 public class AllesInOrdnung extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(AllesInOrdnung.class.getResource("AllesInOrdnung.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(AllesInOrdnung.class.getResource("AllesInOrdnungNewOne.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 750, 510.0);
         stage.setTitle("Alles in Ordnung!");
         stage.setScene(scene);
