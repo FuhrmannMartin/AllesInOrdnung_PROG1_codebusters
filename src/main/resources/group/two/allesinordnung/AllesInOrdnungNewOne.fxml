@@ -239,7 +239,7 @@
                   </Label>
                   <ImageView fitHeight="249.0" fitWidth="309.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../Desktop/Codebusters-01.png" />
+                        <Image url="@Codebusters-01.png" />
                      </image>
                      <VBox.margin>
                         <Insets top="50.0" />
