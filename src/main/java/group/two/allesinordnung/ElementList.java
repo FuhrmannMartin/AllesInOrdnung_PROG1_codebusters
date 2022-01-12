@@ -44,6 +44,8 @@ public class ElementList {
 
         if (!elementAlreadyExisting) {
             elementList.add(element);
+        } else {
+            System.out.println("Element already exists!");
         }
     }
 
