@@ -83,13 +83,32 @@ public class AddElementController {
         // checking input data -> accepted types are cd/dvd/book
         if (isNotNullEmpty(type) && isNotNullEmpty(title) && isNotNullEmpty(author)) {
             if (type.equalsIgnoreCase("cd") || type.equalsIgnoreCase("dvd") || type.equalsIgnoreCase("book")) {
+
+                if (type.equalsIgnoreCase("cd") || type.equalsIgnoreCase("dvd")) {
+                    type = type.toUpperCase();
+                }
+                if (type.equalsIgnoreCase("book")) {
+                    type = capitalizeFirst(type);
+                }
+
                 Element element = new Element(title, type, author, stars); // instantiating new element object
                 ElementList.addElementToElementList(element); // adding new element to list
+                stars = 0; // setting star variable to 0 again
                 Stage stage = (Stage) addElementOkID.getScene().getWindow();
                 stage.close(); // closing GUI for adding new element
             } else {
                 typeID.clear();
                 typeID.appendText("Invalid type! (CD/DVD/Book)");
+            }
+        } else {
+            if (!isNotNullEmpty(type)) {
+                typeID.appendText("Please provide a valid type! (CD/DVD/Book)");
+            }
+            if (!isNotNullEmpty(title)) {
+                titleID.appendText("Please provide title!");
+            }
+            if (!isNotNullEmpty(author)) {
+                authorID.appendText("Please provide author!");
             }
         }
     }
@@ -145,13 +164,21 @@ public class AddElementController {
     }
 
     // function used to check user input in GUI
-    public static boolean isNotNullEmpty(String str) {
+    private static boolean isNotNullEmpty(String str) {
         // check if string is null
         if (str == null) {
             return false;
         }
         // check if string is empty
         else return !str.isEmpty();
+    }
+
+    // function to capitalize the first character of each word in a string
+    private static String capitalizeFirst(String str) {
+        String firstLetter = str.substring(0, 1);
+        String remainingLetters = str.substring(1);
+        firstLetter = firstLetter.toUpperCase();
+        return firstLetter + remainingLetters.toLowerCase();
     }
 
 }

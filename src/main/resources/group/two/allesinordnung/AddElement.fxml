@@ -13,12 +13,12 @@
       <font>
          <Font name="Montserrat Regular" size="13.0" />
       </font></Button>
-   <TextField fx:id="authorID" layoutX="70.0" layoutY="70.0" onAction="#author" prefHeight="26.0" prefWidth="359.0" style="-fx-background-radius: 5em; -fx-border-radius: 5em;" AnchorPane.leftAnchor="70.0" />
-   <Text layoutX="14.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AUTHOR" AnchorPane.leftAnchor="14.0" />
-   <Text layoutX="14.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TITLE" AnchorPane.leftAnchor="14.0" />
-   <TextField fx:id="titleID" layoutX="70.0" layoutY="100.0" onAction="#title" prefHeight="26.0" prefWidth="359.0" style="-fx-background-radius: 5em; -fx-border-radius: 5em;" AnchorPane.leftAnchor="70.0" />
-   <Text layoutX="14.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TYPE" wrappingWidth="48.469818115234375" AnchorPane.leftAnchor="14.0" />
-   <TextField fx:id="typeID" layoutX="68.0" layoutY="40.0" onAction="#type" prefHeight="26.0" prefWidth="359.0" style="-fx-background-radius: 5em; -fx-border-radius: 5em;" AnchorPane.leftAnchor="70.0" />
+   <TextField fx:id="authorID" layoutX="70.0" layoutY="37.0" onAction="#author" prefHeight="26.0" prefWidth="359.0" style="-fx-background-radius: 5em; -fx-border-radius: 5em;" AnchorPane.leftAnchor="70.0" />
+   <Text layoutX="14.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AUTHOR" AnchorPane.leftAnchor="14.0" />
+   <Text layoutX="14.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TITLE" AnchorPane.leftAnchor="14.0" />
+   <TextField fx:id="titleID" layoutX="70.0" layoutY="69.0" onAction="#title" prefHeight="26.0" prefWidth="359.0" style="-fx-background-radius: 5em; -fx-border-radius: 5em;" AnchorPane.leftAnchor="70.0" />
+   <Text layoutX="14.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TYPE" wrappingWidth="48.469818115234375" AnchorPane.leftAnchor="14.0" />
+   <TextField fx:id="typeID" layoutX="70.0" layoutY="100.0" onAction="#type" prefHeight="26.0" prefWidth="359.0" style="-fx-background-radius: 5em; -fx-border-radius: 5em;" AnchorPane.leftAnchor="70.0" />
    <SVGPath fx:id="star1AddID" content="M 240.000 260.000L 260.000 274.641L 257.321 250.000L 280.000 240.000L 257.321 230.000L 260.000 205.359L 240.000 220.000L 220.000 205.359L 222.679 230.000L 200.000 240.000L 222.679 250.000L 220.000 274.641z" layoutX="-164.0" layoutY="-86.0" onMouseClicked="#star1AddClicked" scaleX="0.2" scaleY="0.2" />
    <SVGPath fx:id="star5AddID" content="M 240.000 260.000L 260.000 274.641L 257.321 250.000L 280.000 240.000L 257.321 230.000L 260.000 205.359L 240.000 220.000L 220.000 205.359L 222.679 230.000L 200.000 240.000L 222.679 250.000L 220.000 274.641z" layoutX="-100.0" layoutY="-86.0" onMouseClicked="#star5AddClicked" scaleX="0.2" scaleY="0.2" />
    <SVGPath fx:id="star3AddID" content="M 240.000 260.000L 260.000 274.641L 257.321 250.000L 280.000 240.000L 257.321 230.000L 260.000 205.359L 240.000 220.000L 220.000 205.359L 222.679 230.000L 200.000 240.000L 222.679 250.000L 220.000 274.641z" layoutX="-132.0" layoutY="-86.0" onMouseClicked="#star3AddClicked" scaleX="0.2" scaleY="0.2" />

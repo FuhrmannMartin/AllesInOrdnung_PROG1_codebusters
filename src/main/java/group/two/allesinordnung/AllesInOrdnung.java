@@ -12,9 +12,10 @@ public class AllesInOrdnung extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(AllesInOrdnung.class.getResource("AllesInOrdnungNewOne.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1020.0, 605.0);
+        Scene scene = new Scene(fxmlLoader.load(), 1015.0, 605.0);
         stage.setTitle("Alles in Ordnung!");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 
