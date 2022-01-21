@@ -142,7 +142,7 @@ public class AllesInOrdnungController {
     @FXML // GUI button to set filter to show only elements of type book
     void showBooks(ActionEvent event) {
         deleteVisibleElementInfo();
-        filter = "book";
+        filter = "Book";
         updateListView();
     }
 
@@ -194,7 +194,7 @@ public class AllesInOrdnungController {
     @FXML  // function handling type edit
     public void type() {
         String string = typeID.getText();
-        if (string.equals("CD") || string.equals("DVD") || string.equals("book")) {
+        if (string.equals("CD") || string.equals("DVD") || string.equals("Book")) {
             ElementList.editElementInElementList(selectedElement.hash, "type", string);
         }
     }
