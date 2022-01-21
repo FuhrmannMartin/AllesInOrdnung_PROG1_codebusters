@@ -17,6 +17,7 @@ public class AllesInOrdnung extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+        stage.setOnHiding( event -> ElementList.exportElementList(null));
     }
 
     public static void main(String[] args) {
