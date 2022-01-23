@@ -19,7 +19,7 @@ public class Element {
 
     @Override
     public String toString() {
-        return type + "; " + title + "; " + author + "; " + stars + "; " + hash;
+        return title + "; " + type + "; " + author + "; " + stars + "; " + hash;
     }
 
     // has code is created out of title, type and author
