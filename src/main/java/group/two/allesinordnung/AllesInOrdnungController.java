@@ -218,6 +218,15 @@ public class AllesInOrdnungController {
         }
     }
 
+    @FXML // function handling user element delete request
+    void DeleteOk(ActionEvent event) {
+        if (selectedElement != null) {
+            ElementList.deleteElementFromElementList(selectedElement.hash);
+            deleteVisibleElementInfo(); // remove information of deleted element from info section (lower right corner)
+            updateListView(); // update GUI list showing all currently filtered elements
+        }
+    }
+
     @FXML // 1 star appears gold
     void star1Clicked(MouseEvent event) {
         star1ID.setFill(y);

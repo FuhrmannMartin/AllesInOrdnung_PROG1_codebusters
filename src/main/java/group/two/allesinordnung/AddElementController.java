@@ -2,6 +2,7 @@ package group.two.allesinordnung;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -101,6 +102,7 @@ public class AddElementController {
                 typeID.appendText("Invalid type! (CD/DVD/Book)");
             }
         } else {
+            /*
             if (!isNotNullEmpty(type)) {
                 typeID.appendText("Please provide a valid type! (CD/DVD/Book)");
             }
@@ -110,6 +112,12 @@ public class AddElementController {
             if (!isNotNullEmpty(author)) {
                 authorID.appendText("Please provide author!");
             }
+             */
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Achtung!");
+            alert.setHeaderText("Alle Textfelder ausfuellen.");
+            alert.setContentText("Bitte beheben Sie den Fehler!");
+            alert.showAndWait();
         }
     }
 
