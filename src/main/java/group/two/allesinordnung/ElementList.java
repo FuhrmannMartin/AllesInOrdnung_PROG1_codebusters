@@ -95,7 +95,7 @@ public class ElementList {
             File file = fc.showSaveDialog(stage);
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String json = gson.toJson(elementList); // converts to json
-            WriteStringToFile.main(file, json);
+            WriteStringToFile.writeToFile(file, json);
         } catch (Exception ex) {
             System.out.println("Error while exporting!");
         }

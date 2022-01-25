@@ -13,7 +13,7 @@ import java.io.IOException;
 public class WriteStringToFile {
 
     //public static void main(String[] args) {
-    public static void main(File file, String data) {
+    public static void writeToFile(File file, String data) {
 
         try(FileOutputStream fos = new FileOutputStream(file);
             BufferedOutputStream bos = new BufferedOutputStream(fos)) {
